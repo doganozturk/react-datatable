@@ -40,6 +40,8 @@
     "react-error-overlay": "1.0.9",
     "react-test-renderer": "15.6.1",
     "style-loader": "0.18.2",
+    "stylelint": "8.0.0",
+    "stylelint-config-standard": "17.0.0",
     "sw-precache-webpack-plugin": "0.11.3",
     "url-loader": "0.5.9",
     "webpack": "2.6.1",
@@ -50,11 +52,17 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "test:lint:js": "eslint --ext=js --ext=jsx .",
+    "test:lint:css": "stylelint  src/**/*.css",
+    "test:unit": "node scripts/test.js --env=jsdom",
+    "test": "yarn run test:lint:js && yarn run test:lint:css && yarn run test:unit",
+    "format:css": "prettier --single-quote --write src/**/*.css",
+    "format:js": "prettier --single-quote --write src/**/*.{js,jsx,json}",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
+    "*.css": ["yarn run format:css", "yarn run test:lint:css", "git add"],
+    "*.js": ["yarn run format:js", "yarn run test:lint:eslint", "git add"]
   },
   "jest": {
     "collectCoverageFrom": ["src/**/*.{js,jsx}"],
@@ -84,5 +92,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
   }
 }
