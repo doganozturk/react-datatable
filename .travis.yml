@@ -11,7 +11,10 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh
 
 script:
-  - yarn run test
+  - yarn run coverage
+
+after_success:
+  - codecov
 
 before_deploy:
   - yarn build
