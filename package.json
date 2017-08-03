@@ -62,7 +62,7 @@
   },
   "lint-staged": {
     "*.css": ["yarn run format:css", "yarn run test:lint:css", "git add"],
-    "*.js": ["yarn run format:js", "yarn run test:lint:eslint", "git add"]
+    "*.js": ["yarn run format:js", "yarn run test:lint:js", "git add"]
   },
   "jest": {
     "collectCoverageFrom": ["src/**/*.{js,jsx}"],
