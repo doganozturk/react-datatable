@@ -1,0 +1,24 @@
+language: node_js
+
+node_js:
+  - "7"
+
+sudo: false
+
+cache: yarn
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh
+
+script:
+  - yarn run test
+
+before_deploy:
+  - yarn build
+  - cp ./build/index.html ./build/200.html
+
+deploy:
+  provider: surge
+  project: ./build/
+  domain: react-datatable.surge.sh
+  skip_cleanup: true
