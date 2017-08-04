@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`class DataTableItem extends _react.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      _react2.default.createElement('tr', { className: 'DataTableItem', __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: this },
+        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: this },
+          this.props.item.ID),
+
+        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: this },
+          this.props.item.parentID),
+
+        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: this },
+          this.props.item.Phone),
+
+        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: this },
+          this.props.item.City),
+
+        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: this },
+          this.props.item.Name)));
+
+
+
+  }} renders and matches our snapshot 1`] = `
+<tr
+  className="DataTableItem"
+>
+  <td>
+    1
+  </td>
+  <td>
+    0
+  </td>
+  <td>
+    (403) 125-2552
+  </td>
+  <td>
+    Coevorden
+  </td>
+  <td>
+    Grady
+  </td>
+</tr>
+`;
