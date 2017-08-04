@@ -8,8 +8,42 @@ class DataTable extends Component {
     super(props);
 
     this.state = {
-      items
+      items: this.listToTree(items)
     };
+  }
+
+  listToTree(data, { idKey, parentKey, childrenKey } = {}) {
+    const ID_KEY = idKey || 'ID';
+    const PARENT_KEY = parentKey || 'parentID';
+    const CHILDREN_KEY = childrenKey || 'children';
+
+    const tree = [];
+    const childrenOf = {};
+
+    let item;
+    let id;
+    let parentId;
+
+    for (let i = 0, length = data.length; i < length; i++) {
+      item = data[i];
+      id = item[ID_KEY];
+      parentId = item[PARENT_KEY] || 0;
+      // every item may have children
+      childrenOf[id] = childrenOf[id] || [];
+      // init its children
+      item[CHILDREN_KEY] = childrenOf[id];
+
+      if (parentId !== 0) {
+        // init its parent's children object
+        childrenOf[parentId] = childrenOf[parentId] || [];
+        // push it into its parent's children object
+        childrenOf[parentId].push(item);
+      } else {
+        tree.push(item);
+      }
+    }
+    console.log(tree);
+    return tree;
   }
 
   renderItems() {
@@ -27,7 +61,6 @@ class DataTable extends Component {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Parent ID</th>
                 <th>Phone</th>
                 <th>City</th>
                 <th>Name</th>

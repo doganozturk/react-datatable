@@ -9,9 +9,6 @@ class DataTableItem extends Component {
           {this.props.item.ID}
         </td>
         <td>
-          {this.props.item.parentID}
-        </td>
-        <td>
           {this.props.item.Phone}
         </td>
         <td>

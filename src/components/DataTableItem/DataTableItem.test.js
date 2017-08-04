@@ -9,7 +9,8 @@ describe(DataTableItem, () => {
     parentID: 0,
     Phone: '(403) 125-2552',
     City: 'Coevorden',
-    Name: 'Grady'
+    Name: 'Grady',
+    children: []
   };
   const component = shallow(<DataTableItem item={mockItem} />);
 
@@ -19,7 +20,8 @@ describe(DataTableItem, () => {
       parentID: 0,
       Phone: '(403) 125-2552',
       City: 'Coevorden',
-      Name: 'Grady'
+      Name: 'Grady',
+      children: []
     };
     const component = renderer.create(<DataTableItem item={mockItem} />);
     const tree = component.toJSON();
