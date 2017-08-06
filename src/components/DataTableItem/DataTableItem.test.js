@@ -48,5 +48,7 @@ describe(DataTableItem, () => {
   it('toggles the visibility of the item when toggle button is clicked', () => {
     component.find('span.data-table-item__toggle').simulate('click');
     expect(component.state('visible')).toEqual(true);
+    component.find('span.data-table-item__toggle').simulate('click');
+    expect(component.state('visible')).toEqual(false);
   });
 });

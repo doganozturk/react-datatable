@@ -45,31 +45,56 @@ exports[`class DataTableItem extends _react.Component {
           _react2.default.createElement("span", { className: "data-table-item__toggle", onClick: this.toggle, __source: { fileName: _jsxFileName, lineNumber: 45 }, __self: this },
             this.state.visible ? '-' : '+'),
 
-          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 48 }, __self: this },
-            item.ID),
+          _react2.default.createElement("div", { className: "data-table-item__info", __source: { fileName: _jsxFileName, lineNumber: 48 }, __self: this },
+            _react2.default.createElement("div", { __source: { fileName: _jsxFileName, lineNumber: 49 }, __self: this },
+              _react2.default.createElement("strong", { __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: this }, "ID: "),
+              _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this },
+                item.ID)),
 
-          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this },
-            item.Phone),
 
-          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this },
-            item.City),
+            (item.parentID && item.parentID !== 0 ? true : false) &&
+            _react2.default.createElement("div", { __source: { fileName: _jsxFileName, lineNumber: 56 }, __self: this },
+              _react2.default.createElement("strong", { __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: this }, "parentID: "),
+              _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 58 }, __self: this },
+                item.parentID)),
 
-          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: this },
-            item.Name),
+
+            _react2.default.createElement("div", { __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this },
+              _react2.default.createElement("strong", { __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this }, "Name: "),
+              _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this },
+                item.Name)),
+
+
+            _react2.default.createElement("div", { __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this },
+              _react2.default.createElement("strong", { __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this }, "City: "),
+              _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this },
+                item.City)),
+
+
+            _react2.default.createElement("div", { __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: this },
+              _react2.default.createElement("strong", { __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: this }, "Phone: "),
+              _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: this },
+                item.Phone))),
+
+
 
           _react2.default.createElement("span", {
               className: "data-table-item__remove",
               onClick: () => {
                 this.deleteItem(item.ID);
-              }, __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this }, "[ delete ]"),
+              }, __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: this }, "x"),
 
 
 
           children &&
           _react2.default.createElement("div", {
-              className: "data-table-item__children",
+              className:
+              this.state.visible ?
+              'data-table-item__children data-table-item__children--visible' :
+              'data-table-item__children',
+
               style:
-              this.state.visible ? { display: 'block' } : { display: 'none' }, __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this },
+              this.state.visible ? { display: 'block' } : { display: 'none' }, __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this },
 
 
             children))));
@@ -88,23 +113,47 @@ exports[`class DataTableItem extends _react.Component {
     >
       +
     </span>
-    <span>
-      72
-    </span>
-    <span>
-      (134) 258-4612
-    </span>
-    <span>
-      Kukatpalle
-    </span>
-    <span>
-      Morgan
-    </span>
+    <div
+      className="data-table-item__info"
+    >
+      <div>
+        <strong>
+          ID: 
+        </strong>
+        <span>
+          72
+        </span>
+      </div>
+      <div>
+        <strong>
+          Name: 
+        </strong>
+        <span>
+          Morgan
+        </span>
+      </div>
+      <div>
+        <strong>
+          City: 
+        </strong>
+        <span>
+          Kukatpalle
+        </span>
+      </div>
+      <div>
+        <strong>
+          Phone: 
+        </strong>
+        <span>
+          (134) 258-4612
+        </span>
+      </div>
+    </div>
     <span
       className="data-table-item__remove"
       onClick={[Function]}
     >
-      [ delete ]
+      x
     </span>
     <div
       className="data-table-item__children"
@@ -118,23 +167,47 @@ exports[`class DataTableItem extends _react.Component {
         className="data-table-item"
       >
         <li>
-          <span>
-            82
-          </span>
-          <span>
-            (770) 741-5391
-          </span>
-          <span>
-            San Giuliano di Puglia
-          </span>
-          <span>
-            Burke
-          </span>
+          <div
+            className="data-table-item__info"
+          >
+            <div>
+              <strong>
+                ID: 
+              </strong>
+              <span>
+                82
+              </span>
+            </div>
+            <div>
+              <strong>
+                Name: 
+              </strong>
+              <span>
+                Burke
+              </span>
+            </div>
+            <div>
+              <strong>
+                City: 
+              </strong>
+              <span>
+                San Giuliano di Puglia
+              </span>
+            </div>
+            <div>
+              <strong>
+                Phone: 
+              </strong>
+              <span>
+                (770) 741-5391
+              </span>
+            </div>
+          </div>
           <span
             className="data-table-item__remove"
             onClick={[Function]}
           >
-            [ delete ]
+            x
           </span>
         </li>
       </ul>

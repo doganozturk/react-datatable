@@ -45,29 +45,54 @@ class DataTableItem extends Component {
             <span className="data-table-item__toggle" onClick={this.toggle}>
               {this.state.visible ? '-' : '+'}
             </span>}
-          <span>
-            {item.ID}
-          </span>
-          <span>
-            {item.Phone}
-          </span>
-          <span>
-            {item.City}
-          </span>
-          <span>
-            {item.Name}
-          </span>
+          <div className="data-table-item__info">
+            <div>
+              <strong>ID: </strong>
+              <span>
+                {item.ID}
+              </span>
+            </div>
+            {(item.parentID && item.parentID !== 0 ? true : false) &&
+              <div>
+                <strong>parentID: </strong>
+                <span>
+                  {item.parentID}
+                </span>
+              </div>}
+            <div>
+              <strong>Name: </strong>
+              <span>
+                {item.Name}
+              </span>
+            </div>
+            <div>
+              <strong>City: </strong>
+              <span>
+                {item.City}
+              </span>
+            </div>
+            <div>
+              <strong>Phone: </strong>
+              <span>
+                {item.Phone}
+              </span>
+            </div>
+          </div>
           <span
             className="data-table-item__remove"
             onClick={() => {
               this.deleteItem(item.ID);
             }}
           >
-            [ delete ]
+            x
           </span>
           {children &&
             <div
-              className="data-table-item__children"
+              className={
+                this.state.visible
+                  ? 'data-table-item__children data-table-item__children--visible'
+                  : 'data-table-item__children'
+              }
               style={
                 this.state.visible ? { display: 'block' } : { display: 'none' }
               }

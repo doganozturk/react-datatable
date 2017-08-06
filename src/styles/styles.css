@@ -4,8 +4,81 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: sans-serif;
+  background: linear-gradient(135deg, #ffa000 20%, #ff5000 80%);
 }
 
-.data-table ul {
+.data-table {
+  width: 960px;
+}
+
+.data-table-item {
+  padding: 10px;
+  border-radius: 4px;
   list-style: none;
+  background-color: #fff;
+  box-shadow: 0 12px 42px 0 rgba(0, 0, 0, 0.24);
+}
+
+.data-table-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.data-table-item li {
+  position: relative;
+}
+
+.data-table-item__toggle {
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.data-table-item__info {
+  display: inline-block;
+  margin-left: 40px;
+  padding: 10px 15px;
+}
+
+.data-table-item__children {
+  margin-top: 10px;
+  opacity: 0;
+}
+
+.data-table-item__children--visible {
+  opacity: 1;
+  animation: fadein 0.4s ease-in alternate forwards;
+}
+
+.data-table-item__remove {
+  position: absolute;
+  right: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ff5000;
+  cursor: pointer;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 960px) {
+  #root {
+    margin: 0 5px;
+  }
+
+  #root,
+  .data-table {
+    width: 100%;
+  }
 }
