@@ -1,38 +1,144 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`class DataTableItem extends _react.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      visible: false };
+
+
+    this.toggle = this.toggle.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+  }
+
+  toggle() {
+    this.setState({ visible: !this.state.visible });
+  }
+
+  deleteItem(id) {
+    this.props.deleteItem(id);
+  }
+
   render() {
+    const item = this.props.item;
+
+    let children;
+
+    if (item.children.length) {
+      children = item.children.map(child => {
+        return (
+          _react2.default.createElement(DataTableItem, {
+            key: child.ID,
+            id: child.ID,
+            item: child,
+            deleteItem: this.deleteItem, __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: this }));
+
+
+      });
+    }
+
     return (
-      _react2.default.createElement('tr', { className: 'DataTableItem', __source: { fileName: _jsxFileName, lineNumber: 7 }, __self: this },
-        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 8 }, __self: this },
-          this.props.item.ID),
+      _react2.default.createElement("ul", { className: "data-table-item", __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this },
+        _react2.default.createElement("li", { __source: { fileName: _jsxFileName, lineNumber: 43 }, __self: this },
+          children &&
+          _react2.default.createElement("span", { className: "data-table-item__toggle", onClick: this.toggle, __source: { fileName: _jsxFileName, lineNumber: 45 }, __self: this },
+            this.state.visible ? '-' : '+'),
 
-        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: this },
-          this.props.item.Phone),
+          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 48 }, __self: this },
+            item.ID),
 
-        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 14 }, __self: this },
-          this.props.item.City),
+          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this },
+            item.Phone),
 
-        _react2.default.createElement('td', { __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: this },
-          this.props.item.Name)));
+          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this },
+            item.City),
+
+          _react2.default.createElement("span", { __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: this },
+            item.Name),
+
+          _react2.default.createElement("span", {
+              className: "data-table-item__remove",
+              onClick: () => {
+                this.deleteItem(item.ID);
+              }, __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this }, "[ delete ]"),
+
+
+
+          children &&
+          _react2.default.createElement("div", {
+              className: "data-table-item__children",
+              style:
+              this.state.visible ? { display: 'block' } : { display: 'none' }, __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this },
+
+
+            children))));
+
 
 
 
   }} renders and matches our snapshot 1`] = `
-<tr
-  className="DataTableItem"
+<ul
+  className="data-table-item"
 >
-  <td>
-    1
-  </td>
-  <td>
-    (403) 125-2552
-  </td>
-  <td>
-    Coevorden
-  </td>
-  <td>
-    Grady
-  </td>
-</tr>
+  <li>
+    <span
+      className="data-table-item__toggle"
+      onClick={[Function]}
+    >
+      +
+    </span>
+    <span>
+      72
+    </span>
+    <span>
+      (134) 258-4612
+    </span>
+    <span>
+      Kukatpalle
+    </span>
+    <span>
+      Morgan
+    </span>
+    <span
+      className="data-table-item__remove"
+      onClick={[Function]}
+    >
+      [ delete ]
+    </span>
+    <div
+      className="data-table-item__children"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <ul
+        className="data-table-item"
+      >
+        <li>
+          <span>
+            82
+          </span>
+          <span>
+            (770) 741-5391
+          </span>
+          <span>
+            San Giuliano di Puglia
+          </span>
+          <span>
+            Burke
+          </span>
+          <span
+            className="data-table-item__remove"
+            onClick={[Function]}
+          >
+            [ delete ]
+          </span>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
 `;

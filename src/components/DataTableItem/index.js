@@ -42,7 +42,7 @@ class DataTableItem extends Component {
       <ul className="data-table-item">
         <li>
           {children &&
-            <span onClick={this.toggle}>
+            <span className="data-table-item__toggle" onClick={this.toggle}>
               {this.state.visible ? '-' : '+'}
             </span>}
           <span>
@@ -58,6 +58,7 @@ class DataTableItem extends Component {
             {item.Name}
           </span>
           <span
+            className="data-table-item__remove"
             onClick={() => {
               this.deleteItem(item.ID);
             }}
@@ -66,6 +67,7 @@ class DataTableItem extends Component {
           </span>
           {children &&
             <div
+              className="data-table-item__children"
               style={
                 this.state.visible ? { display: 'block' } : { display: 'none' }
               }

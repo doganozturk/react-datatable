@@ -5,453 +5,3019 @@ exports[`class DataTable extends _react.Component {
     super(props);
 
     this.state = {
-      items: this.listToTree(_data2.default) };
+      items: (0, _utils.listToTree)(_data2.default) };
 
+
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  listToTree(data, { idKey, parentKey, childrenKey } = {}) {
-    const ID_KEY = idKey || 'ID';
-    const PARENT_KEY = parentKey || 'parentID';
-    const CHILDREN_KEY = childrenKey || 'children';
-
-    const tree = [];
-    const childrenOf = {};
-
-    let item;
-    let id;
-    let parentId;
-
-    for (let i = 0, length = data.length; i < length; i++) {
-      item = data[i];
-      id = item[ID_KEY];
-      parentId = item[PARENT_KEY] || 0;
-      // every item may have children
-      childrenOf[id] = childrenOf[id] || [];
-      // init its children
-      item[CHILDREN_KEY] = childrenOf[id];
-
-      if (parentId !== 0) {
-        // init its parent's children object
-        childrenOf[parentId] = childrenOf[parentId] || [];
-        // push it into its parent's children object
-        childrenOf[parentId].push(item);
-      } else {
-        tree.push(item);
-      }
-    }
-    console.log(tree);
-    return tree;
-  }
-
-  renderItems() {
-    return this.state.items.map(item =>
-    _react2.default.createElement(_DataTableItem2.default, { item: item, key: item.ID, __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this }));
+  deleteItem(id) {
+    this.setState({
+      items: (0, _deepFilter2.default)(this.state.items, item => item.ID !== id) });
 
   }
 
   render() {
     return (
-      _react2.default.createElement('div', { className: 'DataTable', __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: this },
-        _react2.default.createElement('h1', { __source: { fileName: _jsxFileName, lineNumber: 58 }, __self: this }, 'Fixed Table header'),
-        _react2.default.createElement('div', { className: 'tbl-header', __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this },
-          _react2.default.createElement('table', { cellPadding: '0', cellSpacing: '0', __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this },
-            _react2.default.createElement('thead', { __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this },
-              _react2.default.createElement('tr', { __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this },
-                _react2.default.createElement('th', { __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this }, 'ID'),
-                _react2.default.createElement('th', { __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this }, 'Phone'),
-                _react2.default.createElement('th', { __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this }, 'City'),
-                _react2.default.createElement('th', { __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this }, 'Name'))))),
-
-
-
-
-        _react2.default.createElement('div', { className: 'tbl-content', __source: { fileName: _jsxFileName, lineNumber: 71 }, __self: this },
-          _react2.default.createElement('table', { cellPadding: '0', cellSpacing: '0', __source: { fileName: _jsxFileName, lineNumber: 72 }, __self: this },
-            _react2.default.createElement('tbody', { __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: this },
-              this.renderItems())))));
-
+      _react2.default.createElement('div', { className: 'data-table', __source: { fileName: _jsxFileName, lineNumber: 26 }, __self: this },
+        this.state.items.map(item =>
+        _react2.default.createElement(_DataTableItem2.default, {
+          key: item.ID,
+          id: item.ID,
+          item: item,
+          deleteItem: this.deleteItem, __source: { fileName: _jsxFileName, lineNumber: 28 }, __self: this }))));
 
 
 
 
   }} renders and matches our snapshot 1`] = `
 <div
-  className="DataTable"
+  className="data-table"
 >
-  <h1>
-    Fixed Table header
-  </h1>
-  <div
-    className="tbl-header"
+  <ul
+    className="data-table-item"
   >
-    <table
-      cellPadding="0"
-      cellSpacing="0"
-    >
-      <thead>
-        <tr>
-          <th>
-            ID
-          </th>
-          <th>
-            Phone
-          </th>
-          <th>
-            City
-          </th>
-          <th>
-            Name
-          </th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-  <div
-    className="tbl-content"
+    <li>
+      <span>
+        1
+      </span>
+      <span>
+        (403) 125-2552
+      </span>
+      <span>
+        Coevorden
+      </span>
+      <span>
+        Grady
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
   >
-    <table
-      cellPadding="0"
-      cellSpacing="0"
-    >
-      <tbody>
-        <tr
-          className="DataTableItem"
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        2
+      </span>
+      <span>
+        (979) 486-1932
+      </span>
+      <span>
+        Chełm
+      </span>
+      <span>
+        Scarlet
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            1
-          </td>
-          <td>
-            (403) 125-2552
-          </td>
-          <td>
-            Coevorden
-          </td>
-          <td>
-            Grady
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              30
+            </span>
+            <span>
+              (641) 756-7073
+            </span>
+            <span>
+              Harrison Hot Springs
+            </span>
+            <span>
+              Hamilton
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    54
+                  </span>
+                  <span>
+                    (800) 876-5942
+                  </span>
+                  <span>
+                    Ribnitz-Damgarten
+                  </span>
+                  <span>
+                    Kelsie
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          62
+                        </span>
+                        <span>
+                          (523) 159-2911
+                        </span>
+                        <span>
+                          Biała Podlaska
+                        </span>
+                        <span>
+                          Clio
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    87
+                  </span>
+                  <span>
+                    (500) 895-9220
+                  </span>
+                  <span>
+                    Piracicaba
+                  </span>
+                  <span>
+                    Maya
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            2
-          </td>
-          <td>
-            (979) 486-1932
-          </td>
-          <td>
-            Chełm
-          </td>
-          <td>
-            Scarlet
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              40
+            </span>
+            <span>
+              (921) 336-7339
+            </span>
+            <span>
+              Namur
+            </span>
+            <span>
+              Lionel
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        3
+      </span>
+      <span>
+        (573) 685-8350
+      </span>
+      <span>
+        Wardha
+      </span>
+      <span>
+        Adria
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            3
-          </td>
-          <td>
-            (573) 685-8350
-          </td>
-          <td>
-            Wardha
-          </td>
-          <td>
-            Adria
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              4
+            </span>
+            <span>
+              (630) 292-9737
+            </span>
+            <span>
+              Villers-la-Loue
+            </span>
+            <span>
+              Xerxes
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    44
+                  </span>
+                  <span>
+                    (287) 866-8953
+                  </span>
+                  <span>
+                    Fiuminata
+                  </span>
+                  <span>
+                    Darius
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span
+                          className="data-table-item__toggle"
+                          onClick={[Function]}
+                        >
+                          +
+                        </span>
+                        <span>
+                          47
+                        </span>
+                        <span>
+                          (779) 411-0381
+                        </span>
+                        <span>
+                          Pontedera
+                        </span>
+                        <span>
+                          Harding
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                        <div
+                          className="data-table-item__children"
+                          style={
+                            Object {
+                              "display": "none",
+                            }
+                          }
+                        >
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                92
+                              </span>
+                              <span>
+                                (925) 263-0254
+                              </span>
+                              <span>
+                                Curacaví
+                              </span>
+                              <span>
+                                Aristotle
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    56
+                  </span>
+                  <span>
+                    (963) 719-2718
+                  </span>
+                  <span>
+                    Gore
+                  </span>
+                  <span>
+                    Rafael
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            5
-          </td>
-          <td>
-            (755) 968-6539
-          </td>
-          <td>
-            Gönen
-          </td>
-          <td>
-            Madeson
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              58
+            </span>
+            <span>
+              (464) 318-7548
+            </span>
+            <span>
+              Curepto
+            </span>
+            <span>
+              Leila
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        5
+      </span>
+      <span>
+        (755) 968-6539
+      </span>
+      <span>
+        Gönen
+      </span>
+      <span>
+        Madeson
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            7
-          </td>
-          <td>
-            (896) 297-6568
-          </td>
-          <td>
-            Louvain-la-Neuve
-          </td>
-          <td>
-            Celeste
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              6
+            </span>
+            <span>
+              (644) 892-5485
+            </span>
+            <span>
+              Timkur
+            </span>
+            <span>
+              Rae
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    14
+                  </span>
+                  <span>
+                    (724) 797-0077
+                  </span>
+                  <span>
+                    Portree
+                  </span>
+                  <span>
+                    Elmo
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span
+                          className="data-table-item__toggle"
+                          onClick={[Function]}
+                        >
+                          +
+                        </span>
+                        <span>
+                          18
+                        </span>
+                        <span>
+                          (938) 793-5446
+                        </span>
+                        <span>
+                          Eugene
+                        </span>
+                        <span>
+                          Dahlia
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                        <div
+                          className="data-table-item__children"
+                          style={
+                            Object {
+                              "display": "none",
+                            }
+                          }
+                        >
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                48
+                              </span>
+                              <span>
+                                (393) 562-0884
+                              </span>
+                              <span>
+                                Widooie
+                              </span>
+                              <span>
+                                Marny
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                59
+                              </span>
+                              <span>
+                                (578) 378-1196
+                              </span>
+                              <span>
+                                Patna
+                              </span>
+                              <span>
+                                Aurelia
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          45
+                        </span>
+                        <span>
+                          (329) 372-0345
+                        </span>
+                        <span>
+                          Laurencekirk
+                        </span>
+                        <span>
+                          Kelsey
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          95
+                        </span>
+                        <span>
+                          (821) 339-0288
+                        </span>
+                        <span>
+                          Rastatt
+                        </span>
+                        <span>
+                          Clayton
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            10
-          </td>
-          <td>
-            (450) 579-0491
-          </td>
-          <td>
-            Middelburg
-          </td>
-          <td>
-            Madaline
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              8
+            </span>
+            <span>
+              (168) 452-3538
+            </span>
+            <span>
+              Worksop
+            </span>
+            <span>
+              Rowan
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    12
+                  </span>
+                  <span>
+                    (712) 483-3905
+                  </span>
+                  <span>
+                    Courbevoie
+                  </span>
+                  <span>
+                    Craig
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span
+                          className="data-table-item__toggle"
+                          onClick={[Function]}
+                        >
+                          +
+                        </span>
+                        <span>
+                          20
+                        </span>
+                        <span>
+                          (351) 187-8200
+                        </span>
+                        <span>
+                          Garaguso
+                        </span>
+                        <span>
+                          Trevor
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                        <div
+                          className="data-table-item__children"
+                          style={
+                            Object {
+                              "display": "none",
+                            }
+                          }
+                        >
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span
+                                className="data-table-item__toggle"
+                                onClick={[Function]}
+                              >
+                                +
+                              </span>
+                              <span>
+                                22
+                              </span>
+                              <span>
+                                (479) 532-6127
+                              </span>
+                              <span>
+                                Salt Lake City
+                              </span>
+                              <span>
+                                Fleur
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                              <div
+                                className="data-table-item__children"
+                                style={
+                                  Object {
+                                    "display": "none",
+                                  }
+                                }
+                              >
+                                <ul
+                                  className="data-table-item"
+                                >
+                                  <li>
+                                    <span>
+                                      67
+                                    </span>
+                                    <span>
+                                      (871) 569-3871
+                                    </span>
+                                    <span>
+                                      Diyarbakır
+                                    </span>
+                                    <span>
+                                      Abra
+                                    </span>
+                                    <span
+                                      className="data-table-item__remove"
+                                      onClick={[Function]}
+                                    >
+                                      [ delete ]
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </li>
+                          </ul>
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span
+                                className="data-table-item__toggle"
+                                onClick={[Function]}
+                              >
+                                +
+                              </span>
+                              <span>
+                                29
+                              </span>
+                              <span>
+                                (268) 646-0066
+                              </span>
+                              <span>
+                                Palermo
+                              </span>
+                              <span>
+                                Eagan
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                              <div
+                                className="data-table-item__children"
+                                style={
+                                  Object {
+                                    "display": "none",
+                                  }
+                                }
+                              >
+                                <ul
+                                  className="data-table-item"
+                                >
+                                  <li>
+                                    <span>
+                                      76
+                                    </span>
+                                    <span>
+                                      (910) 639-7203
+                                    </span>
+                                    <span>
+                                      Prè-Saint-Didier
+                                    </span>
+                                    <span>
+                                      Mohammad
+                                    </span>
+                                    <span
+                                      className="data-table-item__remove"
+                                      onClick={[Function]}
+                                    >
+                                      [ delete ]
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          32
+                        </span>
+                        <span>
+                          (915) 642-4154
+                        </span>
+                        <span>
+                          Bihain
+                        </span>
+                        <span>
+                          Noel
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span
+                          className="data-table-item__toggle"
+                          onClick={[Function]}
+                        >
+                          +
+                        </span>
+                        <span>
+                          46
+                        </span>
+                        <span>
+                          (566) 705-6690
+                        </span>
+                        <span>
+                          Lunel
+                        </span>
+                        <span>
+                          Skyler
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                        <div
+                          className="data-table-item__children"
+                          style={
+                            Object {
+                              "display": "none",
+                            }
+                          }
+                        >
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                57
+                              </span>
+                              <span>
+                                (453) 654-2849
+                              </span>
+                              <span>
+                                Llanelli
+                              </span>
+                              <span>
+                                Carson
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                89
+                              </span>
+                              <span>
+                                (391) 696-7431
+                              </span>
+                              <span>
+                                São Gonçalo
+                              </span>
+                              <span>
+                                Simon
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    13
+                  </span>
+                  <span>
+                    (872) 499-5833
+                  </span>
+                  <span>
+                    Cuccaro Vetere
+                  </span>
+                  <span>
+                    Basia
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    42
+                  </span>
+                  <span>
+                    (308) 835-2758
+                  </span>
+                  <span>
+                    Alto del Carmen
+                  </span>
+                  <span>
+                    Austin
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    88
+                  </span>
+                  <span>
+                    (642) 297-3447
+                  </span>
+                  <span>
+                    Seborga
+                  </span>
+                  <span>
+                    Quentin
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            11
-          </td>
-          <td>
-            (111) 162-2502
-          </td>
-          <td>
-            Birecik
-          </td>
-          <td>
-            Chandler
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              9
+            </span>
+            <span>
+              (873) 337-9560
+            </span>
+            <span>
+              Bad Neuenahr-Ahrweiler
+            </span>
+            <span>
+              Kendall
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    53
+                  </span>
+                  <span>
+                    (298) 734-9439
+                  </span>
+                  <span>
+                    La Pintana
+                  </span>
+                  <span>
+                    Wanda
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            17
-          </td>
-          <td>
-            (407) 519-9894
-          </td>
-          <td>
-            Roubaix
-          </td>
-          <td>
-            Justine
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              15
+            </span>
+            <span>
+              (366) 967-0433
+            </span>
+            <span>
+              Dublin
+            </span>
+            <span>
+              Cairo
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            21
-          </td>
-          <td>
-            (601) 944-5214
-          </td>
-          <td>
-            Pointe-au-Pic
-          </td>
-          <td>
-            Iris
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              19
+            </span>
+            <span>
+              (425) 682-2189
+            </span>
+            <span>
+              Salisbury
+            </span>
+            <span>
+              Irene
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    23
+                  </span>
+                  <span>
+                    (339) 973-1695
+                  </span>
+                  <span>
+                    Meldert
+                  </span>
+                  <span>
+                    Hayley
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          71
+                        </span>
+                        <span>
+                          (808) 719-1689
+                        </span>
+                        <span>
+                          Göteborg
+                        </span>
+                        <span>
+                          Wynter
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          85
+                        </span>
+                        <span>
+                          (843) 182-9656
+                        </span>
+                        <span>
+                          Strongoli
+                        </span>
+                        <span>
+                          Latifah
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    83
+                  </span>
+                  <span>
+                    (772) 321-1060
+                  </span>
+                  <span>
+                    Waret-l'Evque
+                  </span>
+                  <span>
+                    Melanie
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        7
+      </span>
+      <span>
+        (896) 297-6568
+      </span>
+      <span>
+        Louvain-la-Neuve
+      </span>
+      <span>
+        Celeste
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            25
-          </td>
-          <td>
-            (964) 413-7033
-          </td>
-          <td>
-            Joliet
-          </td>
-          <td>
-            Leo
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              26
+            </span>
+            <span>
+              (898) 476-0059
+            </span>
+            <span>
+              Burntisland
+            </span>
+            <span>
+              Rigel
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    31
+                  </span>
+                  <span>
+                    (820) 709-1328
+                  </span>
+                  <span>
+                    Ottignies
+                  </span>
+                  <span>
+                    Liberty
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          34
+                        </span>
+                        <span>
+                          (594) 856-4377
+                        </span>
+                        <span>
+                          Buin
+                        </span>
+                        <span>
+                          Murphy
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span
+                          className="data-table-item__toggle"
+                          onClick={[Function]}
+                        >
+                          +
+                        </span>
+                        <span>
+                          64
+                        </span>
+                        <span>
+                          (444) 946-5781
+                        </span>
+                        <span>
+                          Sala Baganza
+                        </span>
+                        <span>
+                          Roanna
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                        <div
+                          className="data-table-item__children"
+                          style={
+                            Object {
+                              "display": "none",
+                            }
+                          }
+                        >
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                86
+                              </span>
+                              <span>
+                                (341) 123-1359
+                              </span>
+                              <span>
+                                Laakirchen
+                              </span>
+                              <span>
+                                Dacey
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    73
+                  </span>
+                  <span>
+                    (278) 977-1716
+                  </span>
+                  <span>
+                    Tiel
+                  </span>
+                  <span>
+                    Irene
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        10
+      </span>
+      <span>
+        (450) 579-0491
+      </span>
+      <span>
+        Middelburg
+      </span>
+      <span>
+        Madaline
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            60
-          </td>
-          <td>
-            (397) 265-7757
-          </td>
-          <td>
-            Ahmadpur East
-          </td>
-          <td>
-            Zelenia
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              28
+            </span>
+            <span>
+              (486) 637-9167
+            </span>
+            <span>
+              San Maurizio Canavese
+            </span>
+            <span>
+              Wang
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    35
+                  </span>
+                  <span>
+                    (951) 871-5461
+                  </span>
+                  <span>
+                    Gold Coast
+                  </span>
+                  <span>
+                    Ila
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          50
+                        </span>
+                        <span>
+                          (474) 337-2674
+                        </span>
+                        <span>
+                          Hazaribag
+                        </span>
+                        <span>
+                          Lance
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          51
+                        </span>
+                        <span>
+                          (971) 506-3185
+                        </span>
+                        <span>
+                          Gent
+                        </span>
+                        <span>
+                          Orson
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          55
+                        </span>
+                        <span>
+                          (328) 828-7536
+                        </span>
+                        <span>
+                          Opgrimbie
+                        </span>
+                        <span>
+                          Moses
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          70
+                        </span>
+                        <span>
+                          (436) 244-1024
+                        </span>
+                        <span>
+                          Hatfield
+                        </span>
+                        <span>
+                          Marny
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    38
+                  </span>
+                  <span>
+                    (214) 619-7252
+                  </span>
+                  <span>
+                    Stargard Szczeciński
+                  </span>
+                  <span>
+                    Adria
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    41
+                  </span>
+                  <span>
+                    (386) 567-5819
+                  </span>
+                  <span>
+                    Borchtlombeek
+                  </span>
+                  <span>
+                    Erin
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    49
+                  </span>
+                  <span>
+                    (299) 937-4358
+                  </span>
+                  <span>
+                    Zamora
+                  </span>
+                  <span>
+                    Brennan
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          75
+                        </span>
+                        <span>
+                          (829) 494-7378
+                        </span>
+                        <span>
+                          Camiña
+                        </span>
+                        <span>
+                          Phyllis
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span>
+                          90
+                        </span>
+                        <span>
+                          (280) 896-1049
+                        </span>
+                        <span>
+                          Salon-de-Provence
+                        </span>
+                        <span>
+                          Stewart
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    61
+                  </span>
+                  <span>
+                    (120) 369-4537
+                  </span>
+                  <span>
+                    Knokke
+                  </span>
+                  <span>
+                    Sacha
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            68
-          </td>
-          <td>
-            (807) 949-9083
-          </td>
-          <td>
-            Villers-la-Bonne-Eau
-          </td>
-          <td>
-            Wyatt
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              36
+            </span>
+            <span>
+              (781) 305-7685
+            </span>
+            <span>
+              Castel Maggiore
+            </span>
+            <span>
+              Katelyn
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            69
-          </td>
-          <td>
-            (515) 371-8783
-          </td>
-          <td>
-            Poggiodomo
-          </td>
-          <td>
-            Aidan
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              37
+            </span>
+            <span>
+              (716) 572-8734
+            </span>
+            <span>
+              Chapecó
+            </span>
+            <span>
+              Logan
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            72
-          </td>
-          <td>
-            (134) 258-4612
-          </td>
-          <td>
-            Kukatpalle
-          </td>
-          <td>
-            Morgan
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              39
+            </span>
+            <span>
+              (422) 223-5912
+            </span>
+            <span>
+              Bad Vöslau
+            </span>
+            <span>
+              Katell
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    65
+                  </span>
+                  <span>
+                    (262) 323-0211
+                  </span>
+                  <span>
+                    Bredene
+                  </span>
+                  <span>
+                    Summer
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            77
-          </td>
-          <td>
-            (430) 230-5837
-          </td>
-          <td>
-            Bregenz
-          </td>
-          <td>
-            Ethan
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              91
+            </span>
+            <span>
+              (647) 276-5006
+            </span>
+            <span>
+              Follina
+            </span>
+            <span>
+              Thomas
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        11
+      </span>
+      <span>
+        (111) 162-2502
+      </span>
+      <span>
+        Birecik
+      </span>
+      <span>
+        Chandler
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            78
-          </td>
-          <td>
-            (953) 595-4023
-          </td>
-          <td>
-            Shahjahanpur
-          </td>
-          <td>
-            Madeline
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              16
+            </span>
+            <span>
+              (147) 708-7321
+            </span>
+            <span>
+              Rivière-du-Loup
+            </span>
+            <span>
+              Mannix
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            80
-          </td>
-          <td>
-            (546) 698-1207
-          </td>
-          <td>
-            Arnhem
-          </td>
-          <td>
-            Quinlan
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              24
+            </span>
+            <span>
+              (946) 766-1649
+            </span>
+            <span>
+              Corral
+            </span>
+            <span>
+              Baker
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    52
+                  </span>
+                  <span>
+                    (391) 283-3953
+                  </span>
+                  <span>
+                    Leernes
+                  </span>
+                  <span>
+                    Shana
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    74
+                  </span>
+                  <span>
+                    (853) 349-5161
+                  </span>
+                  <span>
+                    Rapagnano
+                  </span>
+                  <span>
+                    Morgan
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    81
+                  </span>
+                  <span>
+                    (182) 582-5900
+                  </span>
+                  <span>
+                    Wilmont
+                  </span>
+                  <span>
+                    Dominic
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            84
-          </td>
-          <td>
-            (861) 753-8646
-          </td>
-          <td>
-            Wolfsburg
-          </td>
-          <td>
-            Upton
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              93
+            </span>
+            <span>
+              (103) 458-0127
+            </span>
+            <span>
+              Ely
+            </span>
+            <span>
+              Mason
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+        <ul
+          className="data-table-item"
         >
-          <td>
-            97
-          </td>
-          <td>
-            (636) 383-2370
-          </td>
-          <td>
-            St. Catharines
-          </td>
-          <td>
-            Maxwell
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span>
+              94
+            </span>
+            <span>
+              (112) 941-0810
+            </span>
+            <span>
+              Lebu
+            </span>
+            <span>
+              Lamar
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        17
+      </span>
+      <span>
+        (407) 519-9894
+      </span>
+      <span>
+        Roubaix
+      </span>
+      <span>
+        Justine
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            99
-          </td>
-          <td>
-            (336) 239-7842
-          </td>
-          <td>
-            Goderich
-          </td>
-          <td>
-            Byron
-          </td>
-        </tr>
-        <tr
-          className="DataTableItem"
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              66
+            </span>
+            <span>
+              (694) 404-3275
+            </span>
+            <span>
+              Belfort
+            </span>
+            <span>
+              Amery
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span>
+                    96
+                  </span>
+                  <span>
+                    (788) 644-3560
+                  </span>
+                  <span>
+                    Cannole
+                  </span>
+                  <span>
+                    Jessica
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        21
+      </span>
+      <span>
+        (601) 944-5214
+      </span>
+      <span>
+        Pointe-au-Pic
+      </span>
+      <span>
+        Iris
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
         >
-          <td>
-            100
-          </td>
-          <td>
-            (714) 477-8291
-          </td>
-          <td>
-            St. Ives
-          </td>
-          <td>
-            Bryar
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          <li>
+            <span
+              className="data-table-item__toggle"
+              onClick={[Function]}
+            >
+              +
+            </span>
+            <span>
+              27
+            </span>
+            <span>
+              (163) 267-0914
+            </span>
+            <span>
+              Lac Ste. Anne
+            </span>
+            <span>
+              Scarlett
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+            <div
+              className="data-table-item__children"
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            >
+              <ul
+                className="data-table-item"
+              >
+                <li>
+                  <span
+                    className="data-table-item__toggle"
+                    onClick={[Function]}
+                  >
+                    +
+                  </span>
+                  <span>
+                    33
+                  </span>
+                  <span>
+                    (137) 830-3127
+                  </span>
+                  <span>
+                    Kapuskasing
+                  </span>
+                  <span>
+                    Aidan
+                  </span>
+                  <span
+                    className="data-table-item__remove"
+                    onClick={[Function]}
+                  >
+                    [ delete ]
+                  </span>
+                  <div
+                    className="data-table-item__children"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  >
+                    <ul
+                      className="data-table-item"
+                    >
+                      <li>
+                        <span
+                          className="data-table-item__toggle"
+                          onClick={[Function]}
+                        >
+                          +
+                        </span>
+                        <span>
+                          43
+                        </span>
+                        <span>
+                          (410) 695-8540
+                        </span>
+                        <span>
+                          Saint-Laurent
+                        </span>
+                        <span>
+                          Deanna
+                        </span>
+                        <span
+                          className="data-table-item__remove"
+                          onClick={[Function]}
+                        >
+                          [ delete ]
+                        </span>
+                        <div
+                          className="data-table-item__children"
+                          style={
+                            Object {
+                              "display": "none",
+                            }
+                          }
+                        >
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                63
+                              </span>
+                              <span>
+                                (475) 190-5102
+                              </span>
+                              <span>
+                                Nicoya
+                              </span>
+                              <span>
+                                Nola
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                          <ul
+                            className="data-table-item"
+                          >
+                            <li>
+                              <span>
+                                98
+                              </span>
+                              <span>
+                                (268) 572-5059
+                              </span>
+                              <span>
+                                San Marcello Pistoiese
+                              </span>
+                              <span>
+                                Marny
+                              </span>
+                              <span
+                                className="data-table-item__remove"
+                                onClick={[Function]}
+                              >
+                                [ delete ]
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        25
+      </span>
+      <span>
+        (964) 413-7033
+      </span>
+      <span>
+        Joliet
+      </span>
+      <span>
+        Leo
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
+        >
+          <li>
+            <span>
+              79
+            </span>
+            <span>
+              (639) 100-6302
+            </span>
+            <span>
+              Montemesola
+            </span>
+            <span>
+              Cara
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        60
+      </span>
+      <span>
+        (397) 265-7757
+      </span>
+      <span>
+        Ahmadpur East
+      </span>
+      <span>
+        Zelenia
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        68
+      </span>
+      <span>
+        (807) 949-9083
+      </span>
+      <span>
+        Villers-la-Bonne-Eau
+      </span>
+      <span>
+        Wyatt
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        69
+      </span>
+      <span>
+        (515) 371-8783
+      </span>
+      <span>
+        Poggiodomo
+      </span>
+      <span>
+        Aidan
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span
+        className="data-table-item__toggle"
+        onClick={[Function]}
+      >
+        +
+      </span>
+      <span>
+        72
+      </span>
+      <span>
+        (134) 258-4612
+      </span>
+      <span>
+        Kukatpalle
+      </span>
+      <span>
+        Morgan
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+      <div
+        className="data-table-item__children"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="data-table-item"
+        >
+          <li>
+            <span>
+              82
+            </span>
+            <span>
+              (770) 741-5391
+            </span>
+            <span>
+              San Giuliano di Puglia
+            </span>
+            <span>
+              Burke
+            </span>
+            <span
+              className="data-table-item__remove"
+              onClick={[Function]}
+            >
+              [ delete ]
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        77
+      </span>
+      <span>
+        (430) 230-5837
+      </span>
+      <span>
+        Bregenz
+      </span>
+      <span>
+        Ethan
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        78
+      </span>
+      <span>
+        (953) 595-4023
+      </span>
+      <span>
+        Shahjahanpur
+      </span>
+      <span>
+        Madeline
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        80
+      </span>
+      <span>
+        (546) 698-1207
+      </span>
+      <span>
+        Arnhem
+      </span>
+      <span>
+        Quinlan
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        84
+      </span>
+      <span>
+        (861) 753-8646
+      </span>
+      <span>
+        Wolfsburg
+      </span>
+      <span>
+        Upton
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        97
+      </span>
+      <span>
+        (636) 383-2370
+      </span>
+      <span>
+        St. Catharines
+      </span>
+      <span>
+        Maxwell
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        99
+      </span>
+      <span>
+        (336) 239-7842
+      </span>
+      <span>
+        Goderich
+      </span>
+      <span>
+        Byron
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
+  <ul
+    className="data-table-item"
+  >
+    <li>
+      <span>
+        100
+      </span>
+      <span>
+        (714) 477-8291
+      </span>
+      <span>
+        St. Ives
+      </span>
+      <span>
+        Bryar
+      </span>
+      <span
+        className="data-table-item__remove"
+        onClick={[Function]}
+      >
+        [ delete ]
+      </span>
+    </li>
+  </ul>
 </div>
 `;
