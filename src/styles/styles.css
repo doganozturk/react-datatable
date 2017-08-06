@@ -1,11 +1,16 @@
 @import '~normalize.css';
 
+html {
+  min-height: 100%;
+}
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
   background: linear-gradient(135deg, #ffa000 20%, #ff5000 80%);
+  background-repeat: no-repeat;
 }
 
 .data-table {
